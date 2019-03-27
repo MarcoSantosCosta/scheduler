@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="180.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <TabPane layoutX="15.0" layoutY="442.0" prefHeight="200.0" prefWidth="590.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <tabs>
+            <Tab text="Agendar">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="107.0" prefWidth="590.0">
+                     <children>
+                        <AnchorPane prefHeight="180.0" prefWidth="590.0" style="-fx-background-color: #F9f9f9;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <ComboBox fx:id="comboBoxType" layoutX="341.0" layoutY="86.0" prefHeight="25.0" prefWidth="200.0" promptText="Type" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="85.0" />
+                              <Button layoutX="521.0" layoutY="132.0" mnemonicParsing="false" onAction="#robot" text="Agendar" AnchorPane.rightAnchor="17.0" AnchorPane.topAnchor="132.0" />
+                              <TextField fx:id="textFieldTaskPath" layoutX="73.0" layoutY="42.0" prefHeight="25.0" prefWidth="503.0" AnchorPane.leftAnchor="73.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="50.0" />
+                              <Label layoutX="15.0" layoutY="44.0" text="Arquivo:" AnchorPane.topAnchor="52.0" />
+                              <Button fx:id="ButtonSelect" layoutX="507.0" layoutY="42.0" mnemonicParsing="false" onAction="#fileChooser" text="Select File" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="50.0" />
+                              <Label layoutX="15.0" layoutY="90.0" text="Hora:" AnchorPane.topAnchor="92.0" />
+                              <TextField fx:id="textFieldHour" layoutX="73.0" layoutY="86.0" prefHeight="25.0" prefWidth="52.0" promptText="12:00" AnchorPane.topAnchor="85.0" />
+                              <CheckBox fx:id="checkBoxWeekdays" layoutX="173.0" layoutY="90.0" mnemonicParsing="false" text="  Only Weekdays" />
+                              <Label layoutX="16.0" layoutY="14.0" text="Código:" />
+                              <TextField fx:id="textFieldCode" layoutX="73.0" layoutY="10.0" prefHeight="25.0" prefWidth="105.0" />
+                              <Label layoutX="194.0" layoutY="14.0" text="Sigla:" />
+                              <TextField fx:id="textFieldAbbreviation" layoutX="231.0" layoutY="10.0" prefHeight="25.0" prefWidth="105.0" />
+                              <Label layoutX="349.0" layoutY="14.0" text="Nome:" />
+                              <TextField fx:id="textFieldName" layoutX="436.0" layoutY="10.0" prefHeight="25.0" prefWidth="187.0" AnchorPane.rightAnchor="15.0" />
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+         </tabs>
+      </TabPane>
+   </children>
+</AnchorPane>

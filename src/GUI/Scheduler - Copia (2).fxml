@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.media.*?>
+<?import java.lang.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Controllers.Scheduler">
+   <children>
+      <MenuBar layoutX="20.0" layoutY="22.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <menus>
+            <Menu mnemonicParsing="false" text="File">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#showConfig" text="Settings" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Watcher">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#runWatcher" text="Start" />
+                  <MenuItem mnemonicParsing="false" onAction="#pauseWatcher" text="Pause" />
+                  <MenuItem mnemonicParsing="false" onAction="#stopWatcher" text="Stop" />
+               </items>
+            </Menu>
+         </menus>
+      </MenuBar>
+      <AnchorPane layoutX="14.0" layoutY="25.0" prefHeight="95.0" prefWidth="580.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="40.0">
+         <children>
+            <Label text="Watcher Status:" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="0.0">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Label>
+            <Label fx:id="labelWathcerStatus" alignment="CENTER" layoutX="-31.0" layoutY="14.0" prefHeight="58.0" prefWidth="327.0" text="Loading..." textAlignment="CENTER" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <font>
+                  <Font name="System Bold" size="40.0" />
+               </font>
+            </Label>
+            <Label text="DataBase:" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="15.0" />
+            <Label fx:id="labelURLDB" text="Loading..." AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="80.0" />
+         </children>
+      </AnchorPane>
+      <SplitPane dividerPositions="0.5" layoutX="521.0" layoutY="282.0" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="150.0">
+         <items>
+            <AnchorPane prefHeight="293.0" prefWidth="580.0">
+               <children>
+                  <TableView fx:id="tableViewSchedules" layoutX="14.0" layoutY="37.0" minWidth="-Infinity" prefHeight="450.0" prefWidth="780.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <columns>
+                        <TableColumn fx:id="tableColumnHour" minWidth="-Infinity" text="Time" />
+                        <TableColumn fx:id="tableColumnName" minWidth="-Infinity" prefWidth="130.0" text="Name" />
+                        <TableColumn fx:id="tableColumnType" minWidth="-Infinity" prefWidth="110.0" text="Type" />
+                        <TableColumn fx:id="tableColumnLastRun" minWidth="-Infinity" prefWidth="168.0" text="Lats Run" />
+                        <TableColumn fx:id="tableColumnPathfile" minWidth="-Infinity" prefWidth="312.0" text="File" />
+                     </columns>
+                  </TableView>
+               </children>
+            </AnchorPane>
+            <TabPane prefHeight="200.0" prefWidth="590.0" tabClosingPolicy="UNAVAILABLE">
+               <tabs>
+                  <Tab text="Schedule">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="107.0" prefWidth="590.0">
+                           <children>
+                              <AnchorPane prefHeight="174.0" prefWidth="590.0" style="-fx-background-color: #F9f9f9;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <children>
+                                    <Label alignment="CENTER" layoutX="16.0" layoutY="13.0" prefHeight="17.0" prefWidth="40.0" text="Code:" textAlignment="CENTER" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="15.0" />
+                                    <TextField fx:id="textFieldCodeEDIT" editable="false" layoutX="73.0" layoutY="10.0" prefHeight="25.0" prefWidth="105.0" AnchorPane.leftAnchor="65.0" AnchorPane.topAnchor="15.0" />
+                                    <Label alignment="TOP_LEFT" layoutX="194.0" layoutY="13.0" prefHeight="17.0" prefWidth="89.0" text="Abbreviation:" textAlignment="CENTER" AnchorPane.leftAnchor="185.0" AnchorPane.topAnchor="15.0" />
+                                    <TextField fx:id="textFieldAbbreviationEDIT" editable="false" layoutX="443.0" layoutY="10.0" prefHeight="25.0" prefWidth="95.0" AnchorPane.leftAnchor="270.0" AnchorPane.topAnchor="15.0" />
+                                    <Label alignment="CENTER" layoutX="425.0" layoutY="13.0" text="Name:" textAlignment="CENTER" AnchorPane.leftAnchor="380.0" AnchorPane.topAnchor="15.0" />
+                                    <TextField fx:id="textFieldNameEDIT" editable="false" layoutX="544.0" layoutY="10.0" prefHeight="25.0" prefWidth="244.0" AnchorPane.leftAnchor="430.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="15.0" />
+                                    <Label layoutX="15.0" layoutY="44.0" text="File:" AnchorPane.topAnchor="50.0" />
+                                    <TextField fx:id="textFieldTaskPathEDIT" editable="false" layoutX="68.0" layoutY="42.0" prefHeight="25.0" prefWidth="716.0" AnchorPane.leftAnchor="65.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="50.0" />
+                                    <Button fx:id="ButtonSelectEDIT" layoutX="507.0" layoutY="42.0" mnemonicParsing="false" onAction="#fileChooserEDIT" text="Select File" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="50.0" />
+                                    <Label layoutX="15.0" layoutY="90.0" text="Hour:" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="85.0" />
+                                    <TextField fx:id="textFieldHourEDIT" editable="false" layoutX="73.0" layoutY="86.0" prefHeight="25.0" prefWidth="52.0" promptText="12:00" AnchorPane.leftAnchor="65.0" AnchorPane.topAnchor="85.0" />
+                                    <CheckBox fx:id="checkBoxWeekdaysEDIT" layoutX="499.0" layoutY="94.0" mnemonicParsing="false" onAction="#onSetOnlhyWeekDays" text="  Only Weekdays" AnchorPane.topAnchor="90.0" />
+                                    <ComboBox fx:id="comboBoxTypeEDIT" disable="true" layoutX="631.0" layoutY="85.0" onAction="#onChageType" prefWidth="150.0" promptText="Type" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="85.0" />
+                                    <AnchorPane layoutX="10.0" layoutY="110.0" prefHeight="70.0" prefWidth="200.0" style="-fx-border-color: C7C8C9;" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="120.0">
+                                       <children>
+                                          <CheckBox fx:id="checkBoxMondayEDIT" disable="true" layoutX="-27.0" layoutY="31.0" mnemonicParsing="false" text="Monday" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="25.0" />
+                                          <CheckBox fx:id="checkBoxTuesdayEDIT" disable="true" layoutX="-17.0" layoutY="41.0" mnemonicParsing="false" text="Tuesdey" AnchorPane.leftAnchor="110.0" AnchorPane.topAnchor="25.0" />
+                                          <CheckBox fx:id="checkBoxWednesdayEDIT" disable="true" layoutX="-7.0" layoutY="51.0" mnemonicParsing="false" text="Wednesday" AnchorPane.leftAnchor="205.0" AnchorPane.topAnchor="25.0" />
+                                          <CheckBox fx:id="checkBoxThursdayEDIT" disable="true" layoutX="3.0" layoutY="61.0" mnemonicParsing="false" text="Thursday" AnchorPane.leftAnchor="300.0" AnchorPane.topAnchor="25.0" />
+                                          <CheckBox fx:id="checkBoxFridayEDIT" disable="true" layoutX="13.0" layoutY="71.0" mnemonicParsing="false" text="Friday" AnchorPane.leftAnchor="395.0" AnchorPane.topAnchor="25.0" />
+                                          <CheckBox fx:id="checkBoxSaturdayEDIT" disable="true" layoutX="23.0" layoutY="81.0" mnemonicParsing="false" text="Saturday" AnchorPane.leftAnchor="490.0" AnchorPane.topAnchor="25.0" />
+                                          <CheckBox fx:id="checkBoxSundayEDIT" disable="true" layoutX="33.0" layoutY="91.0" mnemonicParsing="false" text="Sunday" AnchorPane.leftAnchor="585.0" AnchorPane.topAnchor="25.0" />
+                                       </children>
+                                    </AnchorPane>
+                                    <AnchorPane fx:id="anchorPaneDayEDIT" layoutX="10.0" layoutY="190.0" prefHeight="50.0" prefWidth="798.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                                       <children>
+                                          <Label layoutX="23.0" layoutY="19.0" text="Day:" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="15.0" />
+                                          <TextField fx:id="textFieldDayEDIT" editable="false" layoutX="48.0" layoutY="11.0" prefWidth="50.0" AnchorPane.leftAnchor="55.0" AnchorPane.topAnchor="15.0" />
+                                          <Button disable="true" layoutX="80.0" layoutY="15.0" mnemonicParsing="false" onAction="#onAddDay" text="+" AnchorPane.leftAnchor="80.0" AnchorPane.topAnchor="15.0" />
+                                          <Button disable="true" layoutX="111.0" layoutY="15.0" mnemonicParsing="false" onAction="#clearDays" text="Clear">
+                                             <graphic>
+                                                <Label fx:id="labelDaysAddedEDIT" text="[ ]" />
+                                             </graphic>
+                                          </Button>
+                                       </children>
+                                    </AnchorPane>
+                                    <Button layoutX="719.0" layoutY="253.0" mnemonicParsing="false" onAction="#delete" text="Delete" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="15.0" />
+                                 </children>
+                              </AnchorPane>
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </Tab>
+                  <Tab text="New">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="107.0" prefWidth="590.0">
+                           <children>
+                              <AnchorPane prefHeight="174.0" prefWidth="590.0" style="-fx-background-color: #F9f9f9;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <children>
+                                    <Label alignment="CENTER" layoutX="16.0" layoutY="13.0" prefHeight="17.0" prefWidth="40.0" text="Code:" textAlignment="CENTER" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="15.0" />
+                                    <TextField fx:id="textFieldCode" layoutX="73.0" layoutY="10.0" prefHeight="25.0" prefWidth="105.0" AnchorPane.leftAnchor="65.0" AnchorPane.topAnchor="15.0" />
+                                    <Label alignment="TOP_LEFT" layoutX="194.0" layoutY="13.0" prefHeight="17.0" prefWidth="89.0" text="Abbreviation:" textAlignment="CENTER" AnchorPane.leftAnchor="185.0" AnchorPane.topAnchor="15.0" />
+                                    <TextField fx:id="textFieldAbbreviation" layoutX="443.0" layoutY="10.0" prefHeight="25.0" prefWidth="95.0" AnchorPane.leftAnchor="270.0" AnchorPane.topAnchor="15.0" />
+                                    <Label alignment="CENTER" layoutX="425.0" layoutY="13.0" text="Name:" textAlignment="CENTER" AnchorPane.leftAnchor="380.0" AnchorPane.topAnchor="15.0" />
+                                    <TextField fx:id="textFieldName" layoutX="544.0" layoutY="10.0" prefHeight="25.0" prefWidth="244.0" AnchorPane.leftAnchor="430.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="15.0" />
+                                    <Label layoutX="15.0" layoutY="44.0" text="File:" AnchorPane.topAnchor="50.0" />
+                                    <TextField fx:id="textFieldTaskPath" layoutX="68.0" layoutY="42.0" prefHeight="25.0" prefWidth="716.0" AnchorPane.leftAnchor="65.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="50.0" />
+                                    <Button fx:id="ButtonSelect" layoutX="507.0" layoutY="42.0" mnemonicParsing="false" onAction="#fileChooser" text="Select File" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="50.0" />
+                                    <Label layoutX="15.0" layoutY="90.0" text="Hour:" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="85.0" />
+                                    <TextField fx:id="textFieldHour" layoutX="73.0" layoutY="86.0" prefHeight="25.0" prefWidth="52.0" promptText="12:00" AnchorPane.leftAnchor="65.0" AnchorPane.topAnchor="85.0" />
+                                    <CheckBox fx:id="checkBoxWeekdays" layoutX="499.0" layoutY="94.0" mnemonicParsing="false" onAction="#onSetOnlhyWeekDays" text="  Only Weekdays" AnchorPane.topAnchor="90.0" />
+                                    <ComboBox fx:id="comboBoxType" layoutX="631.0" layoutY="85.0" onAction="#onChageType" prefWidth="150.0" promptText="Type" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="85.0" />
+                                    <AnchorPane layoutX="10.0" layoutY="110.0" prefHeight="70.0" prefWidth="200.0" style="-fx-border-color: C7C8C9;" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="120.0">
+                                       <children>
+                                          <CheckBox fx:id="checkBoxMonday" layoutX="-27.0" layoutY="31.0" mnemonicParsing="false" selected="true" text="Monday" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="25.0" />
+                                          <CheckBox fx:id="checkBoxTuesday" layoutX="-17.0" layoutY="41.0" mnemonicParsing="false" selected="true" text="Tuesdey" AnchorPane.leftAnchor="110.0" AnchorPane.topAnchor="25.0" />
+                                          <CheckBox fx:id="checkBoxWednesday" layoutX="-7.0" layoutY="51.0" mnemonicParsing="false" selected="true" text="Wednesday" AnchorPane.leftAnchor="205.0" AnchorPane.topAnchor="25.0" />
+                                          <CheckBox fx:id="checkBoxThursday" layoutX="3.0" layoutY="61.0" mnemonicParsing="false" selected="true" text="Thursday" AnchorPane.leftAnchor="300.0" AnchorPane.topAnchor="25.0" />
+                                          <CheckBox fx:id="checkBoxFriday" layoutX="13.0" layoutY="71.0" mnemonicParsing="false" selected="true" text="Friday" AnchorPane.leftAnchor="395.0" AnchorPane.topAnchor="25.0" />
+                                          <CheckBox fx:id="checkBoxSaturday" layoutX="23.0" layoutY="81.0" mnemonicParsing="false" selected="true" text="Saturday" AnchorPane.leftAnchor="490.0" AnchorPane.topAnchor="25.0" />
+                                          <CheckBox fx:id="checkBoxSunday" layoutX="33.0" layoutY="91.0" mnemonicParsing="false" selected="true" text="Sunday" AnchorPane.leftAnchor="585.0" AnchorPane.topAnchor="25.0" />
+                                       </children>
+                                    </AnchorPane>
+                                    <AnchorPane fx:id="anchorPaneDay" layoutX="10.0" layoutY="190.0" prefHeight="50.0" prefWidth="798.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                                       <children>
+                                          <Label layoutX="23.0" layoutY="19.0" text="Day:" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="15.0" />
+                                          <TextField fx:id="textFieldDay" layoutX="48.0" layoutY="11.0" prefWidth="50.0" AnchorPane.leftAnchor="55.0" AnchorPane.topAnchor="15.0" />
+                                          <Button layoutX="80.0" layoutY="15.0" mnemonicParsing="false" onAction="#onAddDay" text="+" AnchorPane.leftAnchor="80.0" AnchorPane.topAnchor="15.0" />
+                                          <Button layoutX="111.0" layoutY="15.0" mnemonicParsing="false" onAction="#clearDays" text="Clear">
+                                             <graphic>
+                                                <Label fx:id="labelDaysAdded" text="[ ]" />
+                                             </graphic></Button>
+                                       </children>
+                                    </AnchorPane>
+                                    <Button mnemonicParsing="false" onAction="#schedule" text="Agendar" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="15.0" />
+                                 </children>
+                              </AnchorPane>
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </Tab>
+               </tabs>
+            </TabPane>
+         </items>
+      </SplitPane>
+   </children>
+</AnchorPane>
