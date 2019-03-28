@@ -1,6 +1,7 @@
 package Models;
 
 import controllers.WatcherListener;
+import sun.rmi.runtime.Log;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -76,20 +77,22 @@ public class Watcher {
                 Point p;
                 p = MouseInfo.getPointerInfo().getLocation();
                 System.out.println(new Date().toString() + " Moving mouse from X: " + p.x + " Y: " + p.y);
+                Logger.log(" Moving mouse X: " + p.x + " Y: " + p.y, true);
                 assert robot != null;
                 robot.mouseMove(p.x + movement, p.y);
                 p = MouseInfo.getPointerInfo().getLocation();
-                System.out.println(new Date().toString() + " To X: " + p.x + " Y: " + p.y);
                 movement = -movement;
                 countMove = 0;
             }
         } catch (Exception e) {
+            Logger.log(e.getCause().toString(), true);
             e.printStackTrace();
         }
     }
 
     public void start() {
-        System.out.println(new Date().toString() +" Watcher says: Hello ;) ...");
+        System.out.println(new Date().toString() + " Watcher says: Hello ;) ...");
+        Logger.log(" Watcher says: Hello ;) ...", true);
         if (Watcher.status != 1) {
             Watcher.status = 1;
             new Thread() {
@@ -101,21 +104,25 @@ public class Watcher {
                             Robot run = scheduler.getRobotToRun();
                             if (run != null) {
                                 scheduler.run(run);
-                                System.out.println(new Date().toString() +" Running: "+ run.getName());
+                                Logger.log(" Running: " + run.getName(), true);
+                                System.out.println(new Date().toString() + " Running: " + run.getName());
                                 update();
                             } else {
                                 System.out.println(new Date().toString() + " NOTHING TO DO");
+                                Logger.log(" NOTHING TO DO", true);
                             }
 
                             try {
                                 Thread.sleep(5000);
                             } catch (Exception e) {
+                                Logger.log(e.getMessage(), true);
                                 System.out.println(new Date().toString() + e.getMessage());
                             }
                         }
                         moveMouse();
                     }
-                    System.out.println(new Date().toString() +" Watcher say: God Bye o/");
+                    System.out.println(new Date().toString() + " Watcher say: God Bye o/");
+                    Logger.log(" Watcher say: God Bye o/", true);
                 }
             }.start();
         } else {

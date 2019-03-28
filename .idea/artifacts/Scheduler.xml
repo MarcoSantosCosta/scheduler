@@ -3,7 +3,7 @@
     <output-path>$PROJECT_DIR$/out/artifacts/Scheduler</output-path>
     <properties id="javafx-properties">
       <options>
-        <option name="appClass" value="GUI.Main" />
+        <option name="appClass" value="Main" />
         <option name="description" value="" />
         <option name="htmlPlaceholderId" value="" />
         <option name="title" value="" />

@@ -8,6 +8,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import persistence.DataBase;
@@ -102,10 +104,14 @@ public class Scheduler implements Initializable, WatcherListener {
     private Button buttonEdit;
 
     @FXML
-    private Button buttomSchedule;
+    private Button buttonSchedule;
 
     @FXML
-    private Button buttomSave;
+    private Button buttonRun;
+
+
+    @FXML
+    private Button buttonSave;
 
     @FXML
     private Tab tabScheduler;
@@ -148,16 +154,19 @@ public class Scheduler implements Initializable, WatcherListener {
         this.tableColumnHour.setCellValueFactory(new PropertyValueFactory<>("hourString"));
         this.tableColumnLastRun.setCellValueFactory(new PropertyValueFactory<>("lastRunString"));
         this.tableColumnPathfile.setCellValueFactory(new PropertyValueFactory<>("pathFileString"));
+        this.anchorPaneDay.setVisible(false);
+        this.days = new ArrayList<>();
+
 
         this.robots = tableViewSchedules.getSelectionModel().getSelectedItems();
         this.robots.addListener(listener);
-        this.anchorPaneDay.setVisible(false);
-        this.days = new ArrayList<>();
+
         this.updateDays();
         this.populateTable();
         this.fillSelected();
         this.addMode();
         Watcher.addListener(this);
+
     }
 
 
@@ -217,9 +226,10 @@ public class Scheduler implements Initializable, WatcherListener {
             this.buttonClear.setDisable(true);
 
             this.buttonDelete.setVisible(true);
+            this.buttonRun.setVisible(true);
             this.buttonEdit.setVisible(true);
-            this.buttomSchedule.setVisible(false);
-            this.buttomSave.setVisible(false);
+            this.buttonSchedule.setVisible(false);
+            this.buttonSave.setVisible(false);
 
             this.tabScheduler.setText(tableViewSchedules.getSelectionModel().getSelectedItem().getNameString());
         } else {
@@ -243,8 +253,9 @@ public class Scheduler implements Initializable, WatcherListener {
         this.buttonClear.setDisable(false);
         this.buttonDelete.setVisible(false);
         this.buttonEdit.setVisible(false);
-        this.buttomSave.setVisible(false);
-        this.buttomSchedule.setVisible(true);
+        this.buttonSave.setVisible(false);
+        this.buttonSchedule.setVisible(true);
+        this.buttonRun.setVisible(false);
 
         this.tabScheduler.setText("New Schedule");
     }
@@ -269,14 +280,16 @@ public class Scheduler implements Initializable, WatcherListener {
         this.buttonDelete.setVisible(true);
         this.buttonEdit.setVisible(false);
 
-        this.buttomSave.setVisible(true);
+        this.buttonSave.setVisible(true);
+        this.buttonRun.setVisible(false);
 
         this.tabScheduler.setText("Editing | " + tableViewSchedules.getSelectionModel().getSelectedItem().getNameString());
     }
 
 
     private void populateTable() {
-        tableViewSchedules.setItems(FXCollections.observableArrayList(DataBase.getInstance().getAllBots()));
+        this.robots = FXCollections.observableArrayList(DataBase.getInstance().getAllBots());
+        tableViewSchedules.setItems(this.robots);
     }
 
     @FXML
@@ -364,6 +377,14 @@ public class Scheduler implements Initializable, WatcherListener {
     }
 
 
+
+    @FXML
+    public void runNow(ActionEvent e) {
+        Robot bot = this.tableViewSchedules.getSelectionModel().getSelectedItem();
+        System.out.println("VOU RODAR: " +bot.getNameString());
+        bot.run();
+    }
+
     @FXML
     public void onAddDay(ActionEvent e) {
         int day = new Integer(textFieldDay.getText().trim());
@@ -375,7 +396,10 @@ public class Scheduler implements Initializable, WatcherListener {
 
     @FXML
     public void refresh() {
-        this.populateTable();
+
+        this.robots.removeAll(this.robots);
+        this.robots.addAll(DataBase.getInstance().getAllBots());
+
         this.updateDays();
 
         labelWathcerStatus.setText(Watcher.getStatus());
@@ -398,7 +422,10 @@ public class Scheduler implements Initializable, WatcherListener {
     @FXML
     public void showConfig() {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("../Configurations.fxml"));
+
+            System.out.println(getClass().getResource("/GUI/Configurations.fxml").getPath());
+            Parent root = FXMLLoader.load(getClass().getResource("/GUI/Configurations.fxml"));
+
             Stage stage = new Stage();
             stage.setTitle("Configurations");
             stage.setResizable(false);
@@ -453,7 +480,7 @@ public class Scheduler implements Initializable, WatcherListener {
 
     @FXML
     public void schedule() {
-        if (textFieldHour.getText().length() != 5 || textFieldHour.getText().length() == 0) {
+        if (textFieldHour.getText().length() != 5 || textFieldHour.getText().length() == 0 || textFieldTaskPath.getText().length() == 0 ) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Fill Error");
             alert.setContentText("Please verify the followin fields: Hour, File");
@@ -509,6 +536,15 @@ public class Scheduler implements Initializable, WatcherListener {
     @Override
     public void onUpdate() {
         this.populateTable();
+    }
+
+    @FXML
+    public void onKeyPressed(KeyEvent e){
+        Robot robot = this.tableViewSchedules.getSelectionModel().getSelectedItem();
+        if(e.getCode() == KeyCode.DELETE && robot != null){
+            this.delete();
+        }
+
     }
 
 

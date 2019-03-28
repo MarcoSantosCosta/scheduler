@@ -8,8 +8,8 @@
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="Scheduler.jar" size="71354" download="eager" />
+    <jar href="Scheduler.jar" size="34808" download="eager" />
   </resources>
-  <jfx:javafx-desc  width="600" height="400" main-class="GUI.Main"  name="Scheduler" />
+  <jfx:javafx-desc  width="600" height="400" main-class="Main"  name="Scheduler" />
   <update check="background"/>
 </jnlp>
